@@ -1,0 +1,27 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Student Data</title>
+</head>
+<body>
+
+    <h1>Edit Student Data</h1>
+
+    <form action="/edit/<%= student.id %>" method="post">
+
+        <input
+            type="text"
+            name="name"
+            value="<%= student.name %>"
+            placeholder="Enter Student Name"
+        >
+
+        <button type="submit">Update</button>
+
+    </form>
+
+</body>
+</html>

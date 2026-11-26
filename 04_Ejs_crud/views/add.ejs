@@ -2,19 +2,23 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta
-      name="viewport"
-      content="width=, initial-scale=1.0"
-    />
+    <meta name="viewport" content="width=, initial-scale=1.0" />
     <title>Add</title>
   </head>
   <body>
+    <form action="/add" method="post">
+      <input
+        type="text"
+        name="name"
+        placeholder="Enter Student Name"
+        height="50"
+        width="50"
+        id=""
 
-    <h1>this is add</h1>
-     <ul>
-        <% studentList.forEach((s) => { %>
-            <li><%= s.name %></li>
-        <% }) %>
-    </ul>
+        required
+      />
+
+      <button>Add Student</button>
+    </form>
   </body>
 </html>

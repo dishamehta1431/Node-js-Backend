@@ -4,15 +4,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home</title>
+    <title>Student List</title>
 </head>
 <body>
 
-    <h1>This is Home</h1>
+    <h1>Student List</h1>
 
-   
+    <ul style="list-style: none;">
+        <% studentList.forEach((s) => { %>
 
-    <a href="/add">Student Data Is Here</a>
+            <li>
+                 <%= s.id %>
+                <%= s.name %>
+
+                <a href="/edit/<%= s.id %>">Edit</a>
+
+                <a href="/delete/<%= s.id %>">Delete</a>
+            </li>
+
+        <% }) %>
+    </ul>
+
+    <a href="/add">Add Student Data</a>
 
 </body>
 </html>
