@@ -1,65 +1,75 @@
-    import express from "express";
+import express from "express";
 
-    const app = express();
+const app = express();
 
-    app.set("view engine", "ejs");
+app.set("view engine", "ejs");
 
-    app.use(express.urlencoded({ extended: true }));
+app.use(express.urlencoded({ extended: true }));
 
-    const studentList = [
-      {
-        id: 1,
-        name: "dexter",
-      },
-      { id: 2, name: "alice" },
-      { id: 3, name: "kuromi" },
-    ];
-    app.get("/", (req, res) => {
-      res.render("home", { studentList });
-    });
+const studentList = [
+  {
+    id: 1,
+    name: "dexter",
+  },
+  { id: 2, name: "alice" },
+  { id: 3, name: "kuromi" },
+];
+app.get("/", (req, res) => {
+  res.render("home", { studentList });
+});
 
-    app.get("/add", (req, res) => {
-      res.render("add");
-    });
+app.get("/add", (req, res) => {
+  res.render("add");
+});
 
-    app.post("/add", (req, res) => {
-      const { name } = req.body;
-      const newStudent = {
-        id: studentList.length + 1,
-        name,
-      };
+app.post("/add", (req, res) => {
+  const { name } = req.body;
+  const newStudent = {
+    id: studentList.length + 1,
+    name,
+  };
 
-      studentList.push(newStudent);
+  studentList.push(newStudent);
 
-      res.redirect("/");
-    });
+  res.redirect("/");
+});
 
-    app.get("/edit/:id", (req, res) => {
-      const { id } = req.params;
-      const student = studentList.find((s) => s.id === Number(id));
+app.get("/edit/:id", (req, res) => {
+  const { id } = req.params;
+  const student = studentList.find((s) => s.id === Number(id));
 
-      res.render("edit", { student });
-    });
+  res.render("edit", { student });
+});
 
-    app.post("/edit/:id", (req, res) => {
-      const { id } = req.params;
+app.post("/edit/:id", (req, res) => {
+  const { id } = req.params;
 
-      const index = studentList.findIndex((s) => s.id === Number(id));
-      const { name } = req.body;
+  const index = studentList.findIndex((s) => s.id === Number(id));
+  const { name } = req.body;
 
-      studentList[index] = {
-        id:Number(id),
-        name,
-      };
+  studentList[index] = {
+    id: Number(id),
+    name,
+  };
 
-      res.redirect("/");
-    });
-    const port = 2008;
+  res.redirect("/");
+});
 
-    app.listen(port, (err) => {
-      if (err) {
-        return err;
-      }
+app.get("/delete/:id", (req, res) => {
+  const { id } = req.params;
+  const index = studentList.findIndex((s) => s.id === Number(id));
 
-      console.log(`server is running on port ${port}`);
-    });
+  studentList.splice(index, 1);
+
+  res.redirect("/");
+});
+
+const port = 2008;
+
+app.listen(port, (err) => {
+  if (err) {
+    return err;
+  }
+
+  console.log(`server is running on port ${port}`);
+});
